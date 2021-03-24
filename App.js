@@ -9,11 +9,10 @@ import {
   FlatList,
 } from "react-native";
 import GoalItem from './components/GoalItem';
-import GoalInput from './components/GoalItem';
+import GoalInput from './components/GoalInput';
 export default function App() {
   
   const [courseGoals, setCourseGoals] = useState([]);
-  
 
   const addGoalHandler = (goalTitle) => {
     setCourseGoals((currentGoals) => [
@@ -24,10 +23,10 @@ export default function App() {
   
   return (
     <View style={styles.screen}>
-      <GoalInput onAddGoal = {addGoalhandler}/>
+      <GoalInput onAddGoal={addGoalHandler}/>
       {/* <ScrollView>
         {courseGoals.map((goal) => (
-          <View style={styles.listItem}>
+          <View style={styles.listItem}
             <Text key={goal}>{goal}</Text>
           </View>
         ))}
