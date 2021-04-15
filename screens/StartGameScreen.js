@@ -4,11 +4,13 @@ import {View, Text, StyleSheet, Button, TouchableWithoutFeedback, Keyboard, Aler
 import Card from '../components/Card';
 import Colors from '../constants/colors';
 import Input from '../components/Input';
+import NumberContainer from '../components/NumberContainer';
+
 
 const StartGameScreen = props => {
     const [enteredValue, setEnteredValue] = useState('');
     const [confirmed, setConfirmed] = useState(false);
-    const [selectNumber, setSelectNumber] = useState();
+    const [selectedNumber, setSelectedNumber] = useState();
     const numberInputHandler = inputText => {
         setEnteredValue(inputText.replace(/[^0-9]/g, ''));
     }
@@ -23,13 +25,20 @@ const StartGameScreen = props => {
             return;
         }
         setConfirmed(true);
-        setSelectNumber(chosenNumber);
+        setSelectedNumber(chosenNumber);
         setEnteredValue('');   
+        Keyboard.dismiss();
     };
 
     let confirmedOutput;
     if(confirmed) {
-        confirmedOutput =  (<Card style={styles.summaryContainer}><Text>Chosen Number : {selectNumber}</Text></Card>);
+        confirmedOutput =  (
+            <Card style={styles.summaryContainer}>
+                <Text>You selected </Text>
+                <NumberContainer>{selectedNumber}</NumberContainer>   
+                <Button title="START GAME" onPress={() => props.onStartGame(selectedNumber)}/>          
+            </Card>
+        );
     }
 
     return (
@@ -89,7 +98,8 @@ const styles = StyleSheet.create({
         textAlign:'center'
     },
     summaryContainer: {
-        marginTop:20
+        marginTop:20,
+        alignItems:'center'
     }
 
 });
