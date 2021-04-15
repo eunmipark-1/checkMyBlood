@@ -1,2 +1,2 @@
-# checkMyBlood
-check daily blood sugar
+# React Native Sample
+exercise react native
